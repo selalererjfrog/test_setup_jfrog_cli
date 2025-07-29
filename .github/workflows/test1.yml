@@ -53,7 +53,7 @@ jobs:
 
             - name: Upload artifact
               run: |
-                jf upload artifact123.txt example-repo-local/artifact123.txt
+                jf rt upload artifact123.txt example-repo-local/artifact123.txt
 
 
 
