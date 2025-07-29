@@ -1,0 +1,54 @@
+name: Test jfrog cli
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    test1:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup JFrog CLI
+              uses: selalererjfrog/setup-jfrog-cli@feature/RTDEV-58178
+              env:
+                JF_URL: https://6c7eb70ad05a.ngrok-free.app/
+                JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+
+            - name: Verfiy JFrog CLI
+              run: |
+                jf --version
+                jf c s
+
+            - name: Create artifact
+              id: create_artifact
+              run: |
+                echo "Artifact content" > artifact123.txt
+                ARTIFACT_DIGEST=$(sha256sum artifact123.txt | awk '{print "sha256:"$1}')
+                echo "artifact_digest=$ARTIFACT_DIGEST" >> $GITHUB_OUTPUT
+
+            - name: Create attestation
+              uses: actions/attest@v2
+              with:
+                subject-digest: ${{ steps.create_artifact.outputs.artifact_digest }}
+                subject-name: example-repo-local/artifact123.txt
+                predicate-type: "https://example.com/attestations/custom-review-v1"
+                predicate: |
+                  {
+                    "creationTime": "${{ github.event.repository.pushed_at }}",
+                    "reviewer": "Sela"
+                    "repository: "${{ github.repository }}"
+                  }
+
+            - name: Upload artifact
+              run: |
+                jf upload artifact123.txt example-repo-local/artifact123.txt
+
+
+
+
