@@ -46,7 +46,7 @@ jobs:
                   {
                     "creationTime": "${{ github.event.repository.pushed_at }}",
                     "reviewer": "Sela",
-                    "repository: "${{ github.repository }}"
+                    "repository": "${{ github.repository }}"
                   }
 
             - name: Upload artifact
