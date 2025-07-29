@@ -45,7 +45,7 @@ jobs:
                 predicate: |
                   {
                     "creationTime": "${{ github.event.repository.pushed_at }}",
-                    "reviewer": "Sela"
+                    "reviewer": "Sela",
                     "repository: "${{ github.repository }}"
                   }
 
