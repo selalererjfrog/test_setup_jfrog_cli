@@ -20,6 +20,8 @@ jobs:
 
             - name: Setup JFrog CLI
               uses: selalererjfrog/setup-jfrog-cli@feature/RTDEV-58178
+              with:
+                version: latest
               env:
                 JF_URL: https://6c7eb70ad05a.ngrok-free.app/
                 JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
