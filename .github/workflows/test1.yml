@@ -23,7 +23,7 @@ jobs:
               with:
                 version: latest
               env:
-                JF_URL: https://6c7eb70ad05a.ngrok-free.app/
+                JF_URL: https://2b38790c9fac.ngrok-free.app/
                 JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
 
             - name: Verfiy JFrog CLI
