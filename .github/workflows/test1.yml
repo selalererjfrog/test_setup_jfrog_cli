@@ -83,7 +83,7 @@ jobs:
               uses: actions/attest@v2
               with:
                 subject-digest: ${{ steps.docker_digest.outputs.docker_digest }}
-                subject-name: example-docker-repo-local/docker123:latest
+                subject-name: example-docker-repo-local/docker123/latest/manifest.json
                 predicate-type: "https://example.com/attestations/custom-review-v1"
                 predicate: |
                   {
