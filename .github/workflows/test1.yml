@@ -74,8 +74,8 @@ jobs:
               id: docker_digest
               run: |
                 echo "Manifest:"
-                docker manifest inspect ${{ secrets.DOCKER_HOST }}/example-docker-repo-local/docker123:latest
-                DOCKER_DIGEST=$(docker manifest inspect ${{ secrets.DOCKER_HOST }}/example-docker-repo-local/docker123:latest | sha256sum | awk '{print "sha256:"$1}')
+                docker buildx imagetools inspect --raw ${{ secrets.DOCKER_HOST }}/example-docker-repo-local/docker123:latest
+                DOCKER_DIGEST=$(docker buildx imagetools inspect --raw ${{ secrets.DOCKER_HOST }}/example-docker-repo-local/docker123:latest | sha256sum | awk '{print "sha256:"$1}')
                 echo "DOCKER_DIGEST=$DOCKER_DIGEST"
                 echo "docker_digest=$DOCKER_DIGEST" >> $GITHUB_OUTPUT
 
