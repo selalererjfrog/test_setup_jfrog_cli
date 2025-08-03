@@ -70,6 +70,15 @@ jobs:
                 tags: ${{ secrets.DOCKER_HOST }}/example-docker-repo-local/docker123:latest
                 platforms: linux/amd64
 
+            - name: Calculate docker image digest
+              id: docker_digest
+              run: |
+                DOCKER_DIGEST=$(docker inspect docker123:latest | sha256sum | aws '{print "sha256:"$1}')
+                echo "DOCKER_DIGEST=$DOCKER_DIGEST"
+                echo "docker_digest=$DOCKER_DIGEST" >> $GITHUB_OUTPUT
+
+
+
 
 
 
